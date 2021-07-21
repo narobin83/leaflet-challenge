@@ -40,4 +40,33 @@ var earthquakes = new L.LayerGroup();
         collapsed: false
       }).addTo(myMap);
 
-      d3.json(queryUrl, function(data) {};
+      d3.json(queryUrl, function(data) {
+        function styleinfo(feature) {
+            return {
+              opacity: 1,
+              fillColor: getColor(feature.properties.mag),
+              radius: getRadius(feature.properties.mag),
+              color: "000000",
+              stroke: true,
+              weight: 0.5,
+              fillOpacity: 1
+            };
+        }
+        function getColor(magnitude) {
+            switch (true) {
+              case magnitude > 5:
+                return "#ea2c2c";
+              case magnitude > 4:
+                return "#ea822c";
+              case magnitude > 3:
+                return "#ee9c00";
+              case magnitude > 2:
+                return "#eecc00";
+              case magnitude > 1:
+                return "#d4ee00";
+              default:
+                return "#98ee00";
+              }
+        }
+        
+      });
