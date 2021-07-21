@@ -27,3 +27,17 @@ var earthquakes = new L.LayerGroup();
         Earthquakes: earthquakes
     };
     
+    var myMap = L.map("map", {
+        center: [
+          37.09, -95.71
+        ],
+        zoom: 5,
+        layers: [streetmap, earthquakes]
+      });
+      streetmap.addTo(myMap)
+
+      L.control.layers(baseMaps, overlayMaps, {
+        collapsed: false
+      }).addTo(myMap);
+
+      d3.json(queryUrl, function(data) {};
