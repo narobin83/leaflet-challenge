@@ -68,5 +68,22 @@ var earthquakes = new L.LayerGroup();
                 return "#98ee00";
               }
         }
-        
-      });
+        function getRadius(magnitude) {
+            if (magnitude === 0) {
+              return 1;
+            }
+            return magnitude *4 ;
+        }
+          
+          // function createFeatures(earthquakeData) {
+          L.geoJSON((data),{
+            pointToLayer: function(feature, latlng) {
+              return L.circleMarker(latlng);
+            },
+            style: styleinfo,
+            onEachFeature: function(feature, layer) {
+              layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+            }
+        }).addTo(earthquakes);
+        earthquakes.addTo(myMap);
+    });
